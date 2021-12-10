@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:staged": "jest"
+    "test": "jest --passWithNoTests",
+    "test:staged": "jest --passWithNoTests"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +24,6 @@
     "jest": "^27.4.3",
     "lint-staged": "^12.1.2",
     "ts-jest": "^27.1.0",
-    "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   }
 }
