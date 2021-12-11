@@ -3,7 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
-export default {
+module.exports = {
   roots: ['<rootDir>/src'],
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
@@ -16,5 +16,5 @@ export default {
   // A map from regular expressions to paths to transformers
   transform: {
     '.+\\.ts$': 'ts-jest'
-  },
-};
+  }
+}
