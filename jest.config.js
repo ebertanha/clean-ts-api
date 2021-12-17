@@ -13,6 +13,7 @@ module.exports = {
   coverageDirectory: 'coverage',
   // The test environment that will be used for testing
   testEnvironment: 'jest-environment-node',
+  preset: '@shelf/jest-mongodb',
   // A map from regular expressions to paths to transformers
   transform: {
     '.+\\.ts$': 'ts-jest'
