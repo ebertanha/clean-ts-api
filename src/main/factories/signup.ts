@@ -5,6 +5,7 @@ import { BcryptAdapter } from '../../infra/criptography/bcrypt-adapter'
 import { AccountMongoRepository } from '../../infra/db/mongodb/account-repository/account'
 import { LogControllerDecorator } from '../decorators/log'
 import { Controller } from '../../presentation/protocols'
+import { LogErrorRepository } from '../../data/protocols/log-error-repository'
 
 export const makeSignUpController = (): Controller => {
   const salt = 12
@@ -13,5 +14,13 @@ export const makeSignUpController = (): Controller => {
   const accountMongoRepository = new AccountMongoRepository()
   const dbAddAccount = new DbAddAccount(bcryptAdapter, accountMongoRepository)
   const signUpController = new SignUpController(emailValidatorAdapter, dbAddAccount)
-  return new LogControllerDecorator(signUpController)
+  const makeLogErrorRepository = (): LogErrorRepository => {
+    class LogErrorRepositoryStub implements LogErrorRepository {
+      async log (stack: string): Promise<void> {
+        return await new Promise(resolve => resolve())
+      }
+    }
+    return new LogErrorRepositoryStub()
+  }
+  return new LogControllerDecorator(signUpController, makeLogErrorRepository())
 }
