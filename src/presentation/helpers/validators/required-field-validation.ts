@@ -1,4 +1,4 @@
-import { InvalidParamError } from '../../errors'
+import { MissingParamError } from '../../errors'
 import { Validation } from './validation'
 
 export class RequiredFieldValidation implements Validation {
@@ -10,7 +10,7 @@ export class RequiredFieldValidation implements Validation {
 
   validate (input: any): Error {
     if (!input[this.fieldName]) {
-      return new InvalidParamError(this.fieldName)
+      return new MissingParamError(this.fieldName)
     }
   }
 }
