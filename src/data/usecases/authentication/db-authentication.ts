@@ -1,22 +1,12 @@
 import { AuthenticationModel, HashComparer, Encrypter, LoadAccountByEmailRepository, UpdateAccessTokenRepository, Authentication } from './db-authentications-protocols'
 
 export class DbAuthentication implements Authentication {
-  private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
-  private readonly hashComparer: HashComparer
-  private readonly Encrypter: Encrypter
-  private readonly updateAccessTokenRepository: UpdateAccessTokenRepository
-
   constructor (
-    loadAccountByEmailRepository: LoadAccountByEmailRepository,
-    hashComparer: HashComparer,
-    Encrypter: Encrypter,
-    updateAccessTokenRepository: UpdateAccessTokenRepository
-  ) {
-    this.loadAccountByEmailRepository = loadAccountByEmailRepository
-    this.hashComparer = hashComparer
-    this.Encrypter = Encrypter
-    this.updateAccessTokenRepository = updateAccessTokenRepository
-  }
+    private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository,
+    private readonly hashComparer: HashComparer,
+    private readonly Encrypter: Encrypter,
+    private readonly updateAccessTokenRepository: UpdateAccessTokenRepository
+  ) { }
 
   async auth (authentication: AuthenticationModel): Promise<string> {
     const account = await this.loadAccountByEmailRepository.loadByEmail(authentication.email)
